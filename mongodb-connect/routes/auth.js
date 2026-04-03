@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const { register, login, getMe } = require('../controllers/authController');
+const { protect } = require('../middleware/auth');
 
-// temporary empty route so server doesn't crash
-router.get('/', (req, res) => {
-  res.json({ message: 'Auth route working' });
-});
+router.post('/register', register);
+router.post('/login', login);
+router.get('/me', protect, getMe);
 
 module.exports = router;
